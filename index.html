@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinSense AI - Smart Financial & Crop Insurance Recommendations (SIH1760)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+<div id="app-navbar"></div>
+<div class="container mt-3"><div id="flash-container"></div></div>
+
+<main class="flex-grow-1">
+
+<!-- Hero Section -->
+<section class="hero-section text-center text-lg-start">
+    <div class="hero-glow"></div>
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-7" data-aos="fade-right">
+                <span class="badge badge-custom badge-low mb-3">
+                    <i class="fa-solid fa-bolt me-1"></i> Smart India Hackathon SIH1760
+                </span>
+                <h1 class="display-4 fw-bold mb-4">
+                    AI-Driven Financial & Crop Insurance Planning Matched to Your <span class="brand-gradient">Farming & Economic Cycle</span>
+                </h1>
+                <p class="lead text-muted mb-4">
+                    FinSense AI analyzes demographics, crop seasons, rainfall metrics, income, land holding, and economic trends to deliver personalized banking loans, yields insurance, and Government scheme recommendations with high confidence scores.
+                </p>
+                <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+                    <a href="register.html" class="btn btn-primary-custom btn-lg">
+                        <i class="fa-solid fa-wand-magic-sparkles me-2"></i> Start Free Assessment
+                    </a>
+                    <a href="#how-it-works" class="btn btn-outline-glass btn-lg">
+                        <i class="fa-solid fa-play me-2 text-cyan"></i> How It Works
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-5" data-aos="fade-left">
+                <div class="glass-card p-4 position-relative">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="stat-icon bg-primary bg-opacity-25 text-info">
+                                <i class="fa-solid fa-wheat-awn fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0 text-white">Agri-Cycle Engine</h6>
+                                <span class="small text-muted">Kharif / Rabi Season Active</span>
+                            </div>
+                        </div>
+                        <span class="badge bg-success bg-opacity-25 text-success border border-success border-opacity-50">Live Sync</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between small text-muted mb-1">
+                            <span>PM-KISAN Match Confidence</span>
+                            <span class="text-emerald font-monospace fw-bold">98.4%</span>
+                        </div>
+                        <div class="progress bg-dark" style="height: 8px;">
+                            <div class="progress-bar bg-success" style="width: 98.4%"></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between small text-muted mb-1">
+                            <span>Kisan Credit Card (KCC) Eligibility</span>
+                            <span class="text-cyan font-monospace fw-bold">94.2%</span>
+                        </div>
+                        <div class="progress bg-dark" style="height: 8px;">
+                            <div class="progress-bar bg-info" style="width: 94.2%"></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between small text-muted mb-1">
+                            <span>Fasal Bima Yield Loss Risk Index</span>
+                            <span class="text-warning font-monospace fw-bold">Low-Moderate</span>
+                        </div>
+                        <div class="progress bg-dark" style="height: 8px;">
+                            <div class="progress-bar bg-warning" style="width: 45%"></div>
+                        </div>
+                    </div>
+
+                    <div class="p-3 glass-card bg-dark bg-opacity-50 border-0 rounded-3 small">
+                        <i class="fa-solid fa-quote-left text-indigo me-2"></i>
+                        <span class="text-muted">"FinSense AI matched my 4-acre paddy farm with 4% interest subvention KCC & PMFBY crop shield instantly."</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Economic & Crop Ticker Bar -->
+<div class="ticker-wrap my-4">
+    <div class="container d-flex flex-wrap justify-content-around text-muted small align-items-center gap-3">
+        <div><i class="fa-solid fa-cloud-sun-rain text-cyan me-1"></i> Monsoon Forecast: <strong>Normal Rainfall Expected</strong></div>
+        <div><i class="fa-solid fa-seedling text-emerald me-1"></i> Current Season: <strong>Kharif Sowing Phase</strong></div>
+        <div><i class="fa-solid fa-percent text-warning me-1"></i> Agri Loan Subvention: <strong>4.0% Effective Rate</strong></div>
+        <div><i class="fa-solid fa-shield-halved text-info me-1"></i> Active PM Schemes: <strong>9 Govt Programs Active</strong></div>
+    </div>
+</div>
+
+<!-- Statistics Bar -->
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="100">
+                <div class="glass-card stat-card text-center">
+                    <h2 class="display-6 fw-bold brand-gradient mb-1">50,000+</h2>
+                    <p class="text-muted small mb-0">Assessments Processed</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="200">
+                <div class="glass-card stat-card text-center">
+                    <h2 class="display-6 fw-bold text-emerald mb-1">₹120 Cr+</h2>
+                    <p class="text-muted small mb-0">Loans Recommended</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="300">
+                <div class="glass-card stat-card text-center">
+                    <h2 class="display-6 fw-bold text-cyan mb-1">98.2%</h2>
+                    <p class="text-muted small mb-0">ML Confidence Score</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="400">
+                <div class="glass-card stat-card text-center">
+                    <h2 class="display-6 fw-bold text-warning mb-1">15+</h2>
+                    <p class="text-muted small mb-0">Govt & Agri Schemes</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- System Modules & Features -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="badge badge-custom badge-low mb-2">Core Capabilities</span>
+            <h2 class="display-6 fw-bold">Everything You Need for Intelligent Financial & Insurance Decisions</h2>
+            <p class="text-muted col-lg-7 mx-auto">Tailored for farmers, rural households, self-employed entrepreneurs, and urban professionals alike.</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="glass-card p-4 h-100">
+                    <div class="stat-icon mb-3"><i class="fa-solid fa-wheat-field"></i></div>
+                    <h4 class="h5 text-white mb-2">Agri & Crop Cycle Matching</h4>
+                    <p class="text-muted small">Factors crop type (Paddy, Wheat, Cotton), farming season (Kharif, Rabi), and rainfall drought indices directly into loan terms and yield insurance cover.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="glass-card p-4 h-100">
+                    <div class="stat-icon mb-3 text-emerald"><i class="fa-solid fa-building-columns"></i></div>
+                    <h4 class="h5 text-white mb-2">Banking & Loan Engine</h4>
+                    <p class="text-muted small">Recommends Kisan Credit Cards, Agri Gold Loans, MUDRA loans, personal credit lines, and high-yield rural savings/FD products with pre-calculated eligibility scores.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="glass-card p-4 h-100">
+                    <div class="stat-icon mb-3 text-warning"><i class="fa-solid fa-shield-virus"></i></div>
+                    <h4 class="h5 text-white mb-2">Yield & Health Insurance</h4>
+                    <p class="text-muted small">Calculates precise sum insured and premium estimates for PMFBY Crop Insurance, Pashudhan Livestock cover, Ayushman Health Shield, and PMJJBY Life Insurance.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                <div class="glass-card p-4 h-100">
+                    <div class="stat-icon mb-3 text-info"><i class="fa-solid fa-landmark"></i></div>
+                    <h4 class="h5 text-white mb-2">Government Schemes Engine</h4>
+                    <p class="text-muted small">Automatically matches user demographic profiles with PM-KISAN, PMFBY, KCC, Stand-Up India, Atal Pension Yojana, and Startup India seed funds.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                <div class="glass-card p-4 h-100">
+                    <div class="stat-icon mb-3 text-danger"><i class="fa-solid fa-chart-line"></i></div>
+                    <h4 class="h5 text-white mb-2">AI Risk & Need Prediction</h4>
+                    <p class="text-muted small">Uses a client-side scoring engine to compute financial risk levels, debt exposure, and prediction confidence percentages — instantly, in your browser.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                <div class="glass-card p-4 h-100">
+                    <div class="stat-icon mb-3 text-purple"><i class="fa-solid fa-file-pdf"></i></div>
+                    <h4 class="h5 text-white mb-2">PDF Export & Reporting</h4>
+                    <p class="text-muted small">Generate instant downloadable PDF financial assessment reports with decision explanations, right from your browser.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section id="how-it-works" class="py-5 bg-dark bg-opacity-25">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="badge badge-custom badge-moderate mb-2">Simple Workflow</span>
+            <h2 class="display-6 fw-bold">How FinSense AI Delivers Recommendations</h2>
+        </div>
+        <div class="row g-4 text-center">
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+                <div class="glass-card p-4 h-100">
+                    <div class="step-item mx-auto mb-3 active fs-5">1</div>
+                    <h5 class="text-white">Profile & Income</h5>
+                    <p class="text-muted small">Enter age, occupation, family size, annual income, savings, and existing liabilities.</p>
+                </div>
+            </div>
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                <div class="glass-card p-4 h-100">
+                    <div class="step-item mx-auto mb-3 active fs-5">2</div>
+                    <h5 class="text-white">Agri & Econ Cycle</h5>
+                    <p class="text-muted small">Specify land holding, crop type, season (Kharif/Rabi), livestock, and rainfall conditions.</p>
+                </div>
+            </div>
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+                <div class="glass-card p-4 h-100">
+                    <div class="step-item mx-auto mb-3 active fs-5">3</div>
+                    <h5 class="text-white">AI Risk Assessment</h5>
+                    <p class="text-muted small">The scoring engine evaluates financial risk index, credit score, and insurance need.</p>
+                </div>
+            </div>
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
+                <div class="glass-card p-4 h-100">
+                    <div class="step-item mx-auto mb-3 active fs-5">4</div>
+                    <h5 class="text-white">Get Smart Report</h5>
+                    <p class="text-muted small">View matched schemes, low-interest agri/personal loans, insurance plans & export PDF.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Government Schemes Section -->
+<section id="schemes" class="py-5">
+    <div class="container">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-5" data-aos="fade-up">
+            <div>
+                <span class="badge badge-custom badge-low mb-2">Government Integration</span>
+                <h2 class="display-6 fw-bold mb-0">Supported Government Financial Schemes</h2>
+            </div>
+            <a href="register.html" class="btn btn-outline-glass mt-3 mt-md-0">Check My Eligibility</a>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="glass-card p-4 h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="badge bg-success bg-opacity-25 text-success">Agri Income</span>
+                        <i class="fa-solid fa-hand-holding-dollar text-emerald fs-4"></i>
+                    </div>
+                    <h5 class="text-white mb-2">PM-KISAN Scheme</h5>
+                    <p class="text-muted small mb-3">Provides ₹6,000 per year in three equal installments to small and marginal farmer families across India.</p>
+                    <div class="small text-info fw-bold"><i class="fa-solid fa-circle-check me-1"></i> Land Limit: Up to 10 Acres</div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="glass-card p-4 h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="badge bg-info bg-opacity-25 text-info">Credit Card</span>
+                        <i class="fa-solid fa-credit-card text-cyan fs-4"></i>
+                    </div>
+                    <h5 class="text-white mb-2">Kisan Credit Card (KCC)</h5>
+                    <p class="text-muted small mb-3">Provides timely credit to farmers for agricultural needs at 4% concessional interest rate with prompt repayment subvention.</p>
+                    <div class="small text-info fw-bold"><i class="fa-solid fa-circle-check me-1"></i> Max Benefit: Up to ₹3 Lakhs</div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="glass-card p-4 h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="badge bg-warning bg-opacity-25 text-warning">Crop Shield</span>
+                        <i class="fa-solid fa-wheat-awn-circle-exclamation text-warning fs-4"></i>
+                    </div>
+                    <h5 class="text-white mb-2">PMFBY Crop Insurance</h5>
+                    <p class="text-muted small mb-3">Comprehensive crop loss and yield damage insurance protection against natural calamities, pests, and unseasonal rainfall.</p>
+                    <div class="small text-info fw-bold"><i class="fa-solid fa-circle-check me-1"></i> Premium: Only 1.5% - 2.0%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Accordion Section -->
+<section class="py-5 bg-dark bg-opacity-25">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="badge badge-custom badge-low mb-2">Frequently Asked Questions</span>
+            <h2 class="display-6 fw-bold">Got Questions? We Have Answers</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="accordion glass-card border-0 p-3" id="faqAccordion">
+                    <div class="accordion-item bg-transparent border-bottom border-secondary">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button bg-transparent text-white collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                How does FinSense AI calculate crop loan and insurance eligibility?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-muted">
+                                FinSense AI evaluates your land size in acres, crop type, farming season (Kharif/Rabi), livestock count, and regional rainfall conditions in combination with a rules-based scoring engine trained on typical agricultural lending and crop insurance patterns.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item bg-transparent border-bottom border-secondary">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button bg-transparent text-white collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                Is FinSense AI only for farmers or can salaried professionals use it too?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-muted">
+                                FinSense AI caters to all occupations! Salaried professionals, self-employed entrepreneurs, micro-business owners, and farmers can all receive custom banking, personal loan, health insurance, and investment suggestions tailored to their profile.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item bg-transparent border-0">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button bg-transparent text-white collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                How can I download my prediction report?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-muted">
+                                After completing the 4-step Financial Assessment Form, your detailed recommendation report will display an instant "Export PDF Report" button that generates a downloadable PDF right in your browser.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Form Section -->
+<section id="contact" class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8" data-aos="fade-up">
+                <div class="glass-card p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <span class="badge badge-custom badge-low mb-2">Get In Touch</span>
+                        <h3 class="fw-bold">Contact Our AI Advisory Team</h3>
+                        <p class="text-muted">Have a question or feedback regarding loan subventions or scheme eligibility?</p>
+                    </div>
+
+                    <form id="contactForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" name="name" class="form-control" placeholder="e.g. Prakash" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" name="email" class="form-control" placeholder="prakash@gmail.com" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Subject</label>
+                                <input type="text" name="subject" class="form-control" placeholder="KCC Loan Query / Scheme Feedback">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Message</label>
+                                <textarea name="message" class="form-control" rows="4" placeholder="Type your message here..." required></textarea>
+                            </div>
+                            <div class="col-12 text-center mt-4">
+                                <button type="submit" class="btn btn-primary-custom px-5">
+                                    <i class="fa-solid fa-paper-plane me-2"></i> Send Message
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<div id="app-footer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/app.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+<script>
+    renderChrome('index');
+
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const data = {
+            name: form.name.value, email: form.email.value,
+            subject: form.subject.value, message: form.message.value
+        };
+        FS.addContact(data);
+        showToast('success', 'Thank you for contacting FinSense AI! Our advisory team will reach out shortly.');
+        form.reset();
+    });
+</script>
+</body>
+</html>

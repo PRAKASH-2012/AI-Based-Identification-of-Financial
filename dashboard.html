@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - FinSense AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+<div id="app-navbar"></div>
+<div class="container mt-3"><div id="flash-container"></div></div>
+
+<main class="flex-grow-1">
+<div class="container py-4" id="dashboardRoot"></div>
+</main>
+
+<div id="app-footer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/app.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+<script src="js/charts.js"></script>
+<script>
+    renderChrome('dashboard');
+    const user = FS.requireUser();
+
+    function riskBadge(level) {
+        if (level === 'Low') return '<span class="text-emerald">Low Risk</span>';
+        if (level === 'Moderate') return '<span class="text-warning">Moderate</span>';
+        return '<span class="text-danger">High Risk</span>';
+    }
+    function riskPill(level) {
+        if (level === 'Low') return '<span class="badge badge-custom badge-low">Low</span>';
+        if (level === 'Moderate') return '<span class="badge badge-custom badge-moderate">Moderate</span>';
+        return '<span class="badge badge-custom badge-high">High</span>';
+    }
+
+    if (user) {
+        const predictions = FS.getPredictionsForUser(user.id).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        const latest = predictions[0] || null;
+
+        let historyHtml;
+        if (predictions.length) {
+            historyHtml = `
+            <div class="table-responsive">
+                <table class="table table-dark table-hover align-middle mb-0">
+                    <thead><tr class="text-muted small">
+                        <th>Date</th><th>Occupation</th><th>Risk Level</th><th>Loan Match</th><th>Confidence</th><th>Action</th>
+                    </tr></thead>
+                    <tbody>
+                        ${predictions.map(p => `
+                            <tr>
+                                <td class="small">${new Date(p.created_at).toISOString().slice(0, 10)}</td>
+                                <td><span class="badge bg-secondary">${escapeHtml(p.occupation)}</span></td>
+                                <td>${riskPill(p.risk_level)}</td>
+                                <td class="fw-bold text-cyan">${p.loan_eligibility_score}%</td>
+                                <td class="small font-monospace">${p.prediction_confidence}%</td>
+                                <td><a href="recommendations.html?id=${p.id}" class="btn btn-sm btn-outline-glass px-3">View <i class="fa-solid fa-arrow-right ms-1"></i></a></td>
+                            </tr>`).join('')}
+                    </tbody>
+                </table>
+            </div>`;
+        } else {
+            historyHtml = `
+            <div class="text-center text-muted py-4">
+                <p class="mb-3">You haven't run any financial assessments yet.</p>
+                <a href="assessment.html" class="btn btn-emerald btn-sm">Start Your First Assessment</a>
+            </div>`;
+        }
+
+        document.getElementById('dashboardRoot').innerHTML = `
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+            <div>
+                <h2 class="fw-bold mb-1">Welcome back, ${escapeHtml(user.full_name)}! 👋</h2>
+                <p class="text-muted mb-0 small">
+                    <i class="fa-solid fa-location-dot me-1 text-cyan"></i> ${escapeHtml(user.district || 'District')}, ${escapeHtml(user.state || 'State')} |
+                    <i class="fa-solid fa-briefcase me-1 text-emerald ms-2"></i> ${escapeHtml(user.occupation)}
+                </p>
+            </div>
+            <div><a href="assessment.html" class="btn btn-primary-custom"><i class="fa-solid fa-calculator me-2"></i> New Financial Assessment</a></div>
+        </div>
+
+        <div class="row g-3 mb-4">
+            <div class="col-md-3 col-6"><div class="glass-card p-3 stat-card">
+                <span class="text-muted small">Financial Risk Level</span>
+                ${latest ? `<h3 class="fw-bold mb-0 mt-1">${riskBadge(latest.risk_level)}</h3><div class="small text-muted mt-1">Risk Score: ${latest.risk_score}/100</div>` : `<h4 class="text-muted mb-0 mt-1">Not Assessed</h4>`}
+            </div></div>
+            <div class="col-md-3 col-6"><div class="glass-card p-3 stat-card">
+                <span class="text-muted small">Loan Eligibility</span>
+                <h3 class="fw-bold text-cyan mb-0 mt-1">${latest ? latest.loan_eligibility_score : 0}%</h3>
+                <div class="small text-muted mt-1">Credit Match Confidence</div>
+            </div></div>
+            <div class="col-md-3 col-6"><div class="glass-card p-3 stat-card">
+                <span class="text-muted small">Insurance Need Index</span>
+                <h3 class="fw-bold text-warning mb-0 mt-1">${latest ? latest.insurance_need_score : 0}%</h3>
+                <div class="small text-muted mt-1">Yield & Health Coverage</div>
+            </div></div>
+            <div class="col-md-3 col-6"><div class="glass-card p-3 stat-card">
+                <span class="text-muted small">Total Assessments</span>
+                <h3 class="fw-bold text-white mb-0 mt-1">${predictions.length}</h3>
+                <div class="small text-muted mt-1">Saved Reports</div>
+            </div></div>
+        </div>
+
+        <div class="row g-4 mb-4">
+            <div class="col-lg-6"><div class="glass-card p-4 h-100">
+                <h5 class="fw-bold text-white mb-3"><i class="fa-solid fa-chart-pie me-2 text-cyan"></i> Income vs Expense Breakdown</h5>
+                ${latest ? `<div style="max-height: 280px;" class="d-flex justify-content-center"><canvas id="incomeExpenseChart"></canvas></div>`
+                    : `<div class="text-center text-muted py-5"><i class="fa-solid fa-chart-pie fs-1 mb-3 text-secondary"></i><p>No assessment data available. Complete your assessment to view charts.</p></div>`}
+            </div></div>
+            <div class="col-lg-6"><div class="glass-card p-4 h-100">
+                <h5 class="fw-bold text-white mb-3"><i class="fa-solid fa-radar me-2 text-emerald"></i> Financial Health & Risk Radar</h5>
+                ${latest ? `<div style="max-height: 280px;" class="d-flex justify-content-center"><canvas id="riskMetricsChart"></canvas></div>`
+                    : `<div class="text-center text-muted py-5"><i class="fa-solid fa-radar fs-1 mb-3 text-secondary"></i><p>Complete assessment to generate financial health radar.</p></div>`}
+            </div></div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-8"><div class="glass-card p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold text-white mb-0"><i class="fa-solid fa-history me-2 text-indigo"></i> Recommendation History</h5>
+                    <a href="assessment.html" class="small text-cyan text-decoration-none">Run New Analysis</a>
+                </div>
+                ${historyHtml}
+            </div></div>
+            <div class="col-lg-4"><div class="glass-card p-4">
+                <h5 class="fw-bold text-white mb-3"><i class="fa-solid fa-bell me-2 text-warning"></i> Notifications</h5>
+                <div class="d-flex flex-column gap-3">
+                    <div class="p-3 glass-card bg-dark bg-opacity-50 border-0 rounded-3 small">
+                        <div class="d-flex justify-content-between text-muted mb-1"><strong class="text-white">KCC Interest Subvention</strong><span class="small">Today</span></div>
+                        <p class="mb-0 text-muted">Government announced prompt repayment subvention up to 3% for Kharif season KCC borrowers.</p>
+                    </div>
+                    <div class="p-3 glass-card bg-dark bg-opacity-50 border-0 rounded-3 small">
+                        <div class="d-flex justify-content-between text-muted mb-1"><strong class="text-white">PMFBY Cutoff Date</strong><span class="small">2 Days Ago</span></div>
+                        <p class="mb-0 text-muted">Enrollment for Kharif Paddy crop yield insurance closes soon. Check recommendations for details.</p>
+                    </div>
+                </div>
+            </div></div>
+        </div>`;
+
+        if (latest) {
+            initUserDashboardCharts({
+                income: latest.annual_income || 0,
+                expenses: latest.monthly_expenses || 0,
+                savings: latest.savings || 0,
+                debt: latest.existing_debt || 0,
+                credit_score_norm: Math.min(100, ((latest.credit_score || 650) / 850) * 100),
+                debt_health: Math.max(10, 100 - (((latest.existing_debt || 0) / ((latest.annual_income || 1) + 1)) * 100)),
+                land_health: Math.min(100, (latest.land_size_acres || 0) * 15),
+                rain_health: latest.rainfall_condition === 'Normal' ? 90 : 40,
+                econ_health: latest.economic_cycle === 'Boom / Growth' ? 85 : (latest.economic_cycle === 'Stable / Moderate' ? 60 : 35)
+            });
+        }
+    }
+</script>
+</body>
+</html>
