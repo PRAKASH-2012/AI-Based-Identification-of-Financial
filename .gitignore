@@ -1,0 +1,19 @@
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Python temporary files
+__pycache__/
+*.pyc
+
+# Visual Studio Code workspace settings
+.vscode/
+
+# Node modules if ever used
+node_modules/
+
+# Log files
+*.log
+
+# GitHub Pages build output (if using separate build folder)
+# /docs/
