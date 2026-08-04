@@ -1,23 +1,33 @@
-name: Deploy static site to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]   # change to "master" if that's your default branch
+  workflow_dispatch:    # lets you manually trigger it from the Actions tab
+
+permissions:
+  contents: write        # <-- REQUIRED: gives github-actions[bot] push access
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      # If this is a build project (React/Vite/etc.), add your build steps here, e.g.:
+      # - name: Setup Node
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 20
+      # - name: Install dependencies
+      #   run: npm install
+      # - name: Build
+      #   run: npm run build
 
       - name: Setup GitHub Pages deployment
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+          publish_dir: ./         # change to ./build, ./dist, ./out, etc. if you have a build step
           publish_branch: gh-pages
-          user_name: github-actions[bot]
-          user_email: github-actions[bot]@users.noreply.github.com
