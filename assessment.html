@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial & Farming Assessment Form - FinSense AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+<div id="app-navbar"></div>
+<div class="container mt-3"><div id="flash-container"></div></div>
+
+<main class="flex-grow-1">
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="text-center mb-4" data-aos="fade-up">
+                <span class="badge badge-custom badge-low mb-2">Smart AI Evaluator</span>
+                <h2 class="display-6 fw-bold">Comprehensive Financial & Crop Cycle Assessment</h2>
+                <p class="text-muted col-lg-8 mx-auto">Provide details regarding your income, land holding, crop season, and liabilities for AI recommendation generation.</p>
+            </div>
+
+            <div class="step-indicator px-md-5 mb-4">
+                <div class="step-item active" id="ind-1">1</div>
+                <div class="step-item" id="ind-2">2</div>
+                <div class="step-item" id="ind-3">3</div>
+                <div class="step-item" id="ind-4">4</div>
+            </div>
+
+            <form id="assessmentForm">
+                <!-- STEP 1 -->
+                <div class="wizard-step active" id="step-1">
+                    <div class="glass-card p-4 p-md-5">
+                        <h4 class="fw-bold text-white mb-4 d-flex align-items-center gap-2">
+                            <i class="fa-solid fa-user-circle text-cyan"></i> Step 1: Personal & Demographic Information
+                        </h4>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Age <span class="text-danger">*</span></label>
+                                <input type="number" name="age" id="f_age" class="form-control" min="18" max="100" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Gender <span class="text-danger">*</span></label>
+                                <select name="gender" id="f_gender" class="form-select" required>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Occupation <span class="text-danger">*</span></label>
+                                <select name="occupation" class="form-select" id="occupation" required>
+                                    <option value="Farmer">Farmer / Agriculture</option>
+                                    <option value="Salaried">Salaried Employee</option>
+                                    <option value="Self-Employed / Business">Self-Employed / Business</option>
+                                    <option value="Laborer">Daily Wage Laborer</option>
+                                    <option value="Student / Unemployed">Student / Unemployed</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Location State <span class="text-danger">*</span></label>
+                                <input type="text" name="location_state" id="f_state" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Family Size (Members)</label>
+                                <input type="number" name="family_members" id="f_family" class="form-control" min="1">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end mt-4">
+                            <button type="button" class="btn btn-primary-custom px-4" onclick="nextStep(2)">
+                                Next: Financial Profile <i class="fa-solid fa-arrow-right ms-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 2 -->
+                <div class="wizard-step" id="step-2">
+                    <div class="glass-card p-4 p-md-5">
+                        <h4 class="fw-bold text-white mb-4 d-flex align-items-center gap-2">
+                            <i class="fa-solid fa-indian-rupee-sign text-emerald"></i> Step 2: Financial Profile & Liabilities
+                        </h4>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Annual Income (₹) <span class="text-danger">*</span></label>
+                                <input type="number" name="annual_income" id="f_income" class="form-control" placeholder="e.g. 300000" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Estimated Monthly Expenses (₹) <span class="text-danger">*</span></label>
+                                <input type="number" name="monthly_expenses" class="form-control" value="12000" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Total Liquid Savings / FDs (₹) <span class="text-danger">*</span></label>
+                                <input type="number" name="savings" class="form-control" value="35000" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Existing Outstanding Debt (₹)</label>
+                                <input type="number" name="existing_debt" class="form-control" value="50000">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Approximate Credit Score (300 - 850)</label>
+                                <input type="number" name="credit_score" class="form-control" value="680" min="300" max="850">
+                                <div class="form-text text-muted">If unknown, leave 680 as estimated baseline.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Total Assets Value (Gold, Land, Vehicles) (₹)</label>
+                                <input type="number" name="assets_value" class="form-control" value="450000">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="button" class="btn btn-outline-glass px-4" onclick="prevStep(1)"><i class="fa-solid fa-arrow-left me-2"></i> Previous</button>
+                            <button type="button" class="btn btn-primary-custom px-4" onclick="nextStep(3)">Next: Farming & Climate <i class="fa-solid fa-arrow-right ms-2"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 3 -->
+                <div class="wizard-step" id="step-3">
+                    <div class="glass-card p-4 p-md-5">
+                        <h4 class="fw-bold text-white mb-4 d-flex align-items-center gap-2">
+                            <i class="fa-solid fa-wheat-field text-warning"></i> Step 3: Agricultural & Climate/Economic Cycle
+                        </h4>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Land Holding Size (Acres)</label>
+                                <input type="number" step="0.1" name="land_size_acres" class="form-control" value="3.5">
+                                <div class="form-text text-muted">Enter 0 if non-landholding urban resident.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Primary Crop Type</label>
+                                <select name="crop_type" class="form-select">
+                                    <option value="Paddy">Paddy / Rice</option>
+                                    <option value="Wheat">Wheat</option>
+                                    <option value="Cotton">Cotton</option>
+                                    <option value="Sugarcane">Sugarcane</option>
+                                    <option value="Pulses / Vegetables">Pulses / Vegetables</option>
+                                    <option value="None">None / Non-Agricultural</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Crop Season</label>
+                                <select name="crop_season" class="form-select">
+                                    <option value="Kharif (Monsoon)">Kharif (Monsoon)</option>
+                                    <option value="Rabi (Winter)">Rabi (Winter)</option>
+                                    <option value="Zaid (Summer)">Zaid (Summer)</option>
+                                    <option value="Year-Round">Year-Round</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Livestock Count (Cattle, Buffalo, Poultry)</label>
+                                <input type="number" name="livestock_count" class="form-control" value="2" min="0">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Rainfall & Weather Condition <span class="text-danger">*</span></label>
+                                <select name="rainfall_condition" class="form-select" required>
+                                    <option value="Normal">Normal Rainfall</option>
+                                    <option value="Deficit / Drought">Deficit / Drought Warning</option>
+                                    <option value="Excess / Flood">Excess Rainfall / Flood Alert</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Economic Cycle Status <span class="text-danger">*</span></label>
+                                <select name="economic_cycle" class="form-select" required>
+                                    <option value="Stable / Moderate">Stable / Moderate Growth</option>
+                                    <option value="Boom / Growth">Economic Boom / Inflationary Expansion</option>
+                                    <option value="Recession / Downturn">Recession / Agricultural Downturn</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="button" class="btn btn-outline-glass px-4" onclick="prevStep(2)"><i class="fa-solid fa-arrow-left me-2"></i> Previous</button>
+                            <button type="button" class="btn btn-primary-custom px-4" onclick="nextStep(4)">Next: Goals & Banking <i class="fa-solid fa-arrow-right ms-2"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 4 -->
+                <div class="wizard-step" id="step-4">
+                    <div class="glass-card p-4 p-md-5">
+                        <h4 class="fw-bold text-white mb-4 d-flex align-items-center gap-2">
+                            <i class="fa-solid fa-bullseye text-info"></i> Step 4: Financial Goals & Risk Preference
+                        </h4>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Primary Financial Goal</label>
+                                <select name="financial_goals" class="form-select">
+                                    <option value="Agri Expansion & Equipment">Crop Harvest & Farm Equipment Credit</option>
+                                    <option value="Debt Consolidation">Pay Off High-Interest Existing Debt</option>
+                                    <option value="Crop & Health Protection">Crop Yield Loss & Family Health Protection</option>
+                                    <option value="Savings & Post-Retirement">Guaranteed Savings & Pension Security</option>
+                                    <option value="Business Enterprise Expansion">Micro-Enterprise / Business Expansion</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Risk Tolerance Level</label>
+                                <select name="risk_level" class="form-select">
+                                    <option value="Low">Low Risk (Conservative - Capital Preservation)</option>
+                                    <option value="Medium" selected>Medium Risk (Balanced Growth)</option>
+                                    <option value="High">High Risk (Aggressive Investment)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Current Bank Account Type</label>
+                                <select name="bank_account_type" class="form-select">
+                                    <option value="Savings Account">Regular Savings Account</option>
+                                    <option value="Jan Dhan Account">PM Jan Dhan Yojana Zero Balance Account</option>
+                                    <option value="Current Account">Business Current Account</option>
+                                    <option value="None">No Bank Account</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Existing Insurance Status</label>
+                                <select name="insurance_status" class="form-select">
+                                    <option value="None">No Existing Insurance</option>
+                                    <option value="Crop Insurance Only">Crop Insurance Only</option>
+                                    <option value="Health / Life Only">Health or Life Only</option>
+                                    <option value="Fully Insured">Fully Insured</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="p-3 glass-card bg-dark bg-opacity-50 border-0 rounded-3 mt-4 text-center">
+                            <i class="fa-solid fa-brain text-cyan me-2"></i>
+                            <span class="small text-muted">Upon clicking submit, the FinSense AI scoring engine will process your inputs — entirely in your browser — to calculate risk indices, loan probabilities, and scheme match confidence scores.</span>
+                        </div>
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="button" class="btn btn-outline-glass px-4" onclick="prevStep(3)"><i class="fa-solid fa-arrow-left me-2"></i> Previous</button>
+                            <button type="submit" class="btn btn-emerald btn-lg px-5"><i class="fa-solid fa-wand-magic-sparkles me-2"></i> Generate AI Recommendations</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</main>
+
+<div id="app-footer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/app.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+<script src="js/assessment.js"></script>
+<script>
+    renderChrome('assessment');
+    const currentUser = FS.requireUser();
+
+    if (currentUser) {
+        document.getElementById('f_age').value = currentUser.age || 35;
+        document.getElementById('f_gender').value = currentUser.gender || 'Male';
+        document.getElementById('occupation').value = currentUser.occupation || 'Farmer';
+        document.getElementById('f_state').value = currentUser.state || 'Gujarat';
+        document.getElementById('f_family').value = currentUser.family_members || 4;
+        document.getElementById('f_income').value = currentUser.annual_income || 250000;
+    }
+
+    document.getElementById('assessmentForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const f = e.target;
+        const fd = new FormData(f);
+        const assessmentData = {};
+        fd.forEach((value, key) => { assessmentData[key] = value; });
+
+        const predictionResult = FS.runMlPredictions(assessmentData);
+        const recs = FS.generateFinancialRecommendations(assessmentData, predictionResult);
+        const record = FS.savePrediction(currentUser.id, assessmentData, predictionResult, recs);
+        FS.logActivity(currentUser.id, 'Assessment Submitted', `Generated recommendation report #${record.id}`);
+
+        showToast('success', 'AI recommendations generated!');
+        setTimeout(() => { window.location.href = `recommendations.html?id=${record.id}`; }, 400);
+    });
+</script>
+</body>
+</html>
